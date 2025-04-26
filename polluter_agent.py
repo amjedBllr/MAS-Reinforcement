@@ -3,10 +3,10 @@ import asyncio
 from spade.agent import Agent
 from spade.behaviour import PeriodicBehaviour
 from spade.message import Message
-from environment import Environment  # Import at module level
+from environment import Environment 
 
 class PolluterAgent(Agent):
-    SIZE = Environment.SIZE  # Get size from Environment
+    SIZE = Environment.SIZE  
     
     class PolluteBehaviour(PeriodicBehaviour):
         async def run(self):
@@ -25,7 +25,6 @@ class PolluterAgent(Agent):
             # Convert coordinates to string format "x1,y1;x2,y2;..."
             polluted_str = ";".join([f"{x},{y}" for x, y in polluted_cells])
             
-            # Notify Observer agent
             observer_msg = Message(
                 to="observator1234@xmpp.jp",
                 body=polluted_str,
@@ -41,5 +40,5 @@ class PolluterAgent(Agent):
 
     async def setup(self):
         print("PolluterAgent started")
-        # Add polluting behavior (every 5 seconds)
-        self.add_behaviour(self.PolluteBehaviour(period=60.0))
+        
+        self.add_behaviour(self.PolluteBehaviour(period=45.0))

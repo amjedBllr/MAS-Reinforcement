@@ -37,7 +37,7 @@ class CleanerAgent(Agent):
                     
                     # Display updated environment
                     Environment.display_grid()
-                    await asyncio.sleep(1)  # Pause between steps
+                    await asyncio.sleep(0.8)  # Pause between steps
                 
                 print("Cleaning completed !!")
 

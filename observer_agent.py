@@ -25,7 +25,7 @@ class ObserverAgent(Agent):
             return actions
         
         def initialize_q_table(self):
-            """Initialize Q-table for all possible state-action pairs"""
+            
             all_positions = [(x, y) for x in range(Environment.SIZE) 
                            for y in range(Environment.SIZE)]
             for pos in all_positions:

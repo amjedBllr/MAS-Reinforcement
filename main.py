@@ -6,13 +6,11 @@ from spade import run
 import asyncio
 
 async def main():
-    # Initialize environment
     print("\nInitializing environment :")
 
     Environment.initialize_plot()
     Environment.display_grid()
     
-    # Start agents
     polluter = PolluterAgent("polluter1234@xmpp.jp", "password")
     observer = ObserverAgent("observator1234@xmpp.jp", "password")
     cleaner = CleanerAgent("cleaner1234@xmpp.jp", "password")

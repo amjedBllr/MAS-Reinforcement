@@ -14,16 +14,14 @@ class Environment:
 
     @classmethod
     def initialize_plot(cls):
-        """Initialize the plot window."""
-        plt.ion()  # Turn on interactive mode
+        plt.ion() 
         cls.fig, cls.ax = plt.subplots()
         cls.img = cls.ax.imshow(cls.grid, cmap="Blues", vmin=0, vmax=1)
         cls.ax.set_title("Environment Grid")
-        plt.show(block=False)  # Show the plot non-blocking
+        plt.show(block=False) 
 
     @classmethod
     def update_plot(cls):
-        """Update the plot when the grid changes."""
         if cls.img is not None:
             cls.img.set_data(cls.grid)
             cls.fig.canvas.draw_idle()
@@ -31,7 +29,6 @@ class Environment:
 
     @classmethod
     def display_grid(cls):
-        """Print the grid and update the plot."""
         print("\n" + "="*50)
         print("Current Environment Grid:")
         for row in cls.grid:
@@ -40,7 +37,7 @@ class Environment:
         cls.update_plot()
 
 async def main():
-    # Start the container
+    
     container = Container()
     await container.start()
 
