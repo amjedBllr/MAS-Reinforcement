@@ -41,4 +41,4 @@ class PolluterAgent(Agent):
     async def setup(self):
         print("PolluterAgent started")
         
-        self.add_behaviour(self.PolluteBehaviour(period=45.0))
+        self.add_behaviour(self.PolluteBehaviour(period=65.0))

@@ -13,11 +13,11 @@ class CleanerAgent(Agent):
                 print(f"CleanerAgent received cleaning path from {msg.sender}:")
                 print(msg.body)
                 print("="*50 + "\n")
-                
+
                 # Parse directions
                 directions = msg.body.split(",")
                 current_pos = (0, 0)  # Starting position
-                
+
                 print("Beginning cleaning process...")
                 for i, direction in enumerate(directions, 1):
                     # Move cleaner
@@ -27,18 +27,24 @@ class CleanerAgent(Agent):
                     elif direction == "up": y += 1
                     elif direction == "down": y -= 1
                     current_pos = (x, y)
-                    
+
+                    # Save original value and mark cleaner position
+                    prev_value = Environment.grid[x][y]
+                    Environment.grid[x][y] = 2  # Mark cleaner location
+                    Environment.display_grid()
+                    await asyncio.sleep(0.4)
+
                     # Clean if cell is polluted
-                    if Environment.grid[x][y] == 1:
-                        Environment.grid[x][y] = 0
+                    if prev_value == 1:
                         print(f"Step {i}: Cleaned ({x}, {y})")
+                        Environment.grid[x][y] = 0
                     else:
                         print(f"Step {i}: Moved to ({x}, {y}) [already clean]")
-                    
-                    # Display updated environment
+                        Environment.grid[x][y] = 0 if prev_value == 0 else prev_value
+
                     Environment.display_grid()
-                    await asyncio.sleep(0.8)  # Pause between steps
-                
+                    await asyncio.sleep(0.4)
+
                 print("Cleaning completed !!")
 
     async def setup(self):
