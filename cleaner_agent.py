@@ -48,7 +48,7 @@ class CleanerAgent(Agent):
                 print("Cleaning completed !!")
 
     async def setup(self):
-        print("CleanerAgent initialized and ready")
+        print("CleanerAgent started")
         template = Template()
         template.metadata = {
             "ontology": "cleaning-path"
