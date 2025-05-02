@@ -3,6 +3,7 @@ from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.template import Template
 from environment import Environment
+from spade.message import Message
 
 class CleanerAgent(Agent):
     class CleaningBehaviour(CyclicBehaviour):
@@ -47,10 +48,38 @@ class CleanerAgent(Agent):
 
                 print("Cleaning completed !!")
 
+                               
+                polluter_msg = Message(
+                    to="polluter99@jabber.sk",
+                    body="Cleaning completed !!",
+                    metadata={
+                        "performative": "request",
+                        "ontology": "pollution-request",
+                        "action": "pollute-now",
+                        "message_type": "chat"
+                    }
+                )
+                await self.send(polluter_msg)
+                
+                #? debugging message :
+                polluter_msg = Message(
+                    to="bot99@jabber.sk",
+                    body="Cleaning completed !!",
+                    metadata={
+                        "performative": "request",
+                        "ontology": "pollution-request",
+                        "action": "pollute-now",
+                        "message_type": "chat"
+                    }
+                )
+                await self.send(polluter_msg)
+        
+
+
     async def setup(self):
         print("CleanerAgent started")
         template = Template()
         template.metadata = {
             "ontology": "cleaning-path"
         }
-        self.add_behaviour(self.CleaningBehaviour(), template)
+        self.add_behaviour(self.CleaningBehaviour())

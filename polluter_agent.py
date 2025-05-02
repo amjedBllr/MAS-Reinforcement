@@ -26,19 +26,36 @@ class PolluterAgent(Agent):
             polluted_str = ";".join([f"{x},{y}" for x, y in polluted_cells])
             
             observer_msg = Message(
-                to="observator1234@xmpp.jp",
+                to="observer99@jabber.sk",
                 body=polluted_str,
                 metadata={
                     "performative": "inform",
                     "ontology": "pollution-report",
-                    "action": "new-pollution"
+                    "action": "new-pollution",
+                    "message_type": "chat"
                 }
             )
+            
             await self.send(observer_msg)
+
+            #? debugging message
+            observer_msg = Message(
+                to="bot99@jabber.sk",
+                body=polluted_str,
+                metadata={
+                    "performative": "inform",
+                    "ontology": "pollution-report",
+                    "action": "new-pollution",
+                    "message_type": "chat"
+                }
+            )
+            
+            await self.send(observer_msg)
+
             print(f"Polluter - Notified Observer about the pollution of the {len(polluted_cells)} follwing cells : {polluted_str}")
             print("="*50 + "\n")
 
     async def setup(self):
         print("PolluterAgent started")
         
-        self.add_behaviour(self.PolluteBehaviour(period=120.0))
+        self.add_behaviour(self.PolluteBehaviour(period=100.0))
